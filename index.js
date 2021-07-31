@@ -43,8 +43,14 @@ const storage = new GridFsStorage({
 const upload = multer({storage})
 
 const port  = process.env.PORT|| 8000
+
+
 app.get('/',(req,res)=>{
     res.render('index')
+})
+
+app.get("/add",(req,res)=>{
+    res.render("add")
 })
 //route post upload desc uploads file ot db
 app.post('/upload', upload.single('file'),(req,res)=>{
