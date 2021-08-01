@@ -52,6 +52,14 @@ app.get('/',(req,res)=>{
 app.get("/add",(req,res)=>{
     res.render("add")
 })
+
+io.on('connection',(socket)=>{
+    console.log('a new connection ')
+    socket.emit('message','Welcome to whatsapplike')
+    socket.on('disconnect',()=>{
+        io.emit('message','a user has left the chat')
+    })
+})
 //route post upload desc uploads file ot db
 app.post('/upload', upload.single('file'),(req,res)=>{
     res.redirect('/')
