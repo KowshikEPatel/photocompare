@@ -52,7 +52,11 @@ app.get('/',(req,res)=>{
 app.get("/add",(req,res)=>{
     res.render("add")
 })
-
+const app2 = express();
+const http = require('http');
+const server = http.createServer(app2);
+const socketio = require('socket.io');
+const io = socketio(server);
 io.on('connection',(socket)=>{
     console.log('a new connection ')
     socket.emit('message','Welcome to whatsapplike')
