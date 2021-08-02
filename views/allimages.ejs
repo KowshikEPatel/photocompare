@@ -25,6 +25,33 @@
         </div>
         <script>
             document.getElementById('images').append(sessionStorage.getItem('images'))
+
+            function createDomMani(ele,eleClassName="",...arr){
+                var element1=document.createElement(ele);
+   
+                element1.setAttribute("class",eleClassName);
+    
+                for(let iter=0;iter<arr.length;iter++){
+                    if(arr[iter].includes("=")){
+                    let attreibute,attributename;
+                    [attreibute,attributename]=arr[iter].split("=");
+                    element1.setAttribute(attreibute,attributename);
+                    }
+                    else{
+                        element1.innerHTML=arr[iter];
+                }    
+            }
+                return element1;
+            }
+            sessionStorage.getItem('images').map(e=>{
+                let colelement = createDomMani("div","col-lg-3")
+                let cardlelement = createDomMani("div","card")
+                let imageele = createDomMani("img","card-img-top",`src=/image/${e["filename"]}`)
+                cardlelement.append(imageele)
+                colelement.append(cardlelement)
+                document.getElementById("images").append(colelement)
+
+            })
         </script>
     </body>
 </html>

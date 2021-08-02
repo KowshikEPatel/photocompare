@@ -60,6 +60,10 @@ app.get("/add",(req,res)=>{
     res.render("add")
 })
 
+app.get("/allimages",(req,res)=>{
+    res.render("allimages")
+})
+
 //route post upload desc uploads file ot db
 app.post('/upload', upload.single('file'),(req,res)=>{
     res.redirect('/')
