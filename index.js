@@ -15,6 +15,9 @@ app.use(bodyParserjson);
 app.use(methodOverride('_method'));
 const dbURL = process.env.dbURL;
 const conn = mongoose.createConnection(dbURL,{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true});
+let filemonarray = new mongoose.Schema({"filename":String,"upvotes":Integer})
+const FilemonarrayModel = mongoose.Model("imagearray",filemonarray);
 
 let gfs;
 conn.once('open',()=>{
@@ -26,11 +29,14 @@ const storage = new GridFsStorage({
     url:dbURL,
     file:(req,file)=>{
         return new Promise((resolve,reject) =>{
-            crypto.randomBytes(16,(err,buf)=>{
+            crypto.randomBytes(16, async(err,buf)=>{
+
                 if(err){
                     return reject(err);
                 }
                 const filename = buf.toString('hex') + path.extname(file.originalname);
+                let savepost = await FilemonarrayModel({"filename":filename,"upvote":0})
+                console.log(savepost)
                 const fileInfo = {
                     filename:filename,
                     bucketName:'uploads'
@@ -44,9 +50,9 @@ const upload = multer({storage})
 
 const port  = process.env.PORT|| 8000
 
-app.use(express.json())
+
 app.get('/',(req,res)=>{
-    res.render('index').json({"message":"success"})
+    res.render('index')
 })
 
 app.get("/add",(req,res)=>{

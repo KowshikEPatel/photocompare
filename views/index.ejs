@@ -52,6 +52,7 @@
         function clickprint(){
             console.log(sessionStorage.getItem('images'))
             let data = JSON.parse(sessionStorage.getItem('images'))
+            console.log(data)
             document.getElementById("image2").src = `/image/${data[4]["filename"]}`
         }
         
