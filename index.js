@@ -16,7 +16,7 @@ app.use(methodOverride('_method'));
 const dbURL = process.env.dbURL;
 const conn = mongoose.createConnection(dbURL,{useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(dbURL, {useNewUrlParser: true, useUnifiedTopology: true});
-let filemonarray = new mongoose.Schema({"filename":String,"upvotes":Integer})
+let filemonarray = new mongoose.Schema({"filename":String,"upvotes":Number})
 const FilemonarrayModel = mongoose.Model("imagearray",filemonarray);
 
 let gfs;
