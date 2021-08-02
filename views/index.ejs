@@ -51,7 +51,7 @@
         })
         function clickprint(){
             console.log(sessionStorage.getItem('images'))
-            data = JSON.parse(sessionStorage.getItem('images'))
+            let data = JSON.parse(sessionStorage.getItem('images'))
             document.getElementById("image2").src = `/image/${data[4]["filename"]}`
         }
         
