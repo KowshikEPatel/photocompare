@@ -24,7 +24,7 @@
             <div class="col-lg-6">
                 <img src="/image/2fd3e7bafdce58c0dd80c33463aa6ae9.JPG" class="images"  alt="guvi image">
                 <div>
-                    <button class="btn btn-primary" onclick='clickprint("image1")'>
+                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint("image1")'>
                         👍Upvote
                     </button>
                 </div>
@@ -32,8 +32,8 @@
             <div class="col-lg-6">
                 <img src="/image/b0e2e36bbbf9ec085ca4de3703ff6f49.JPG" class="images"  alt="guvi image">
                 <div>
-                    <button class="btn btn-primary" onclick='clickprint("image2")'>
-                        👍Upvote
+                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint("image2")'>
+                        👍 Upvote
                     </button>
                 </div>
             </div>
@@ -44,12 +44,7 @@
         function clickprint(str){
             console.log(str)
         }
-        const io = require("socket.io-client");
-        const socket = io()
-
-        socket.on('message',text=>{
-            console.log(text)
-        })
+        
     </script>
     
 </body>

@@ -44,26 +44,15 @@ const upload = multer({storage})
 
 const port  = process.env.PORT|| 8000
 
-
+app.use(express.json())
 app.get('/',(req,res)=>{
-    res.render('index')
+    res.render('index').json({"message":"success"})
 })
 
 app.get("/add",(req,res)=>{
     res.render("add")
 })
-const app2 = express();
-const http = require('http');
-const server = http.createServer(app2);
-const socketio = require('socket.io');
-const io = socketio(server);
-io.on('connection',(socket)=>{
-    console.log('a new connection ')
-    socket.emit('message','Welcome to whatsapplike')
-    socket.on('disconnect',()=>{
-        io.emit('message','a user has left the chat')
-    })
-})
+
 //route post upload desc uploads file ot db
 app.post('/upload', upload.single('file'),(req,res)=>{
     res.redirect('/')
