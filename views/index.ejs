@@ -24,7 +24,7 @@
             <div class="col-lg-6">
                 <img id="image1" class="images"  alt="guvi image">
                 <div>
-                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint("image1")'>
+                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint()'>
                         👍Upvote
                     </button>
                 </div>
@@ -32,7 +32,7 @@
             <div class="col-lg-6">
                 <img id="image2" class="images"  alt="guvi image">
                 <div>
-                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint("image2")'>
+                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint()'>
                         👍 Upvote
                     </button>
                 </div>
@@ -46,11 +46,11 @@
         .then(data=>{
             
             document.getElementById("image1").src = `/image/${data[3]["filename"]}`
-            
-            document.getElementById("image2").src = `/image/${data[3]["filename"]}`
+            document.getElementById("image2").src = `/image/${data[2]["filename"]}`
+            sessionStorage.setItem('images',JSON.stringify(data))
         })
-        function clickprint(str){
-            console.log(str)
+        function clickprint(){
+            console.log(sessionStorage.getItem('images'))
         }
         
     </script>
