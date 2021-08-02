@@ -35,7 +35,8 @@ const storage = new GridFsStorage({
                     return reject(err);
                 }
                 const filename = buf.toString('hex') + path.extname(file.originalname);
-                let savepost = await FilemonarrayModel({"filename":filename,"upvote":0})
+                let savepostmod = new FilemonarrayModel({"filename":filename,"upvotes":0})
+                let savepost = await savepostmod.save()
                 console.log(savepost)
                 const fileInfo = {
                     filename:filename,
