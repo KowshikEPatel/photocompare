@@ -43,7 +43,7 @@
             }
                 return element1;
             }
-            sessionStorage.getItem('images').map(e=>{
+            JSON.parse(sessionStorage.getItem('images')).map(e=>{
                 let colelement = createDomMani("div","col-lg-3")
                 let cardlelement = createDomMani("div","card")
                 let imageele = createDomMani("img","card-img-top",`src=/image/${e["filename"]}`)
