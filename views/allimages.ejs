@@ -9,9 +9,10 @@
         
         <style>
             .images{
-                    width:475px;
+                    width:100%;
                     height:auto;
-                    border: 1px solid black;
+                    border: 2px solid black;
+                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                     }
         </style>
     </head>
@@ -24,8 +25,7 @@
 
         </div>
         <script>
-            document.getElementById('images').append(sessionStorage.getItem('images'))
-
+            
             function createDomMani(ele,eleClassName="",...arr){
                 var element1=document.createElement(ele);
    

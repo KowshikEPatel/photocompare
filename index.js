@@ -66,7 +66,7 @@ app.get("/allimages",(req,res)=>{
 
 //route post upload desc uploads file ot db
 app.post('/upload', upload.single('file'),(req,res)=>{
-    res.redirect('/')
+    res.redirect('/add')
 })
 
 //route get /files
