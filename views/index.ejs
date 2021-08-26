@@ -14,19 +14,35 @@
                 border: 2px solid black;
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 }
+        .title{
+            background-color: #500707;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .brand{
+            font-size: 2.5rem; 
+            font-weight: 550; 
+        }
     </style>
 </head>
 <body>
+    <div class="row title">
+        <p class="brand">Facemash</p>
+        <nav>
+            <a class="navi-item" href="/">Cute or Not</a>
+            <a class="navi-item" href="/add"><i class="fas fa-upload"> Upload</a>
+            <a class="navi-item" href="/allimages"><i class="far fa-images"> All images </i></a>
+        </nav>
+    </div>
     <div class="container">
-        <div class="row">
-            <h1>Photo compare application</h1>
-        </div>
+        
         <div class="row">
             <div class="col-lg-5">
-                <img id="image1" class="images"  alt="guvi image">
+                <img id="0" class="images"  alt="guvi image">
                 <div>
-                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint()'>
-                        👍Upvote
+                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint(event)' name="0">
+                        <i class="fas fa-heart"></i>  Upvote
                     </button>
                 </div>
             </div>
@@ -34,23 +50,12 @@
                 OR
             </div>
             <div class="col-lg-5">
-                <img id="image2" class="images"  alt="guvi image">
+                <img id="1" class="images"  alt="guvi image">
                 <div>
-                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint()'>
-                        👍 Upvote
+                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint(event)' name="1">
+                        <i class="fas fa-heart"></i> Upvote
                     </button>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4">
-
-            </div>
-            <div class="col-lg-4">
-                <a class="btn btn-dark" href="/add" ><i class="fas fa-upload"> Upload</i></a>
-            </div>
-            <div class="col-lg-4">
-                <a class="btn btn-dark" href="/allimages" ><i class="far fa-images"> All images </i></a>
             </div>
         </div>
     </div>
@@ -60,15 +65,35 @@
         .then(response=>response.json())
         .then(data=>{
             
-            document.getElementById("image1").src = `/image/${data[3]["filename"]}`
-            document.getElementById("image2").src = `/image/${data[2]["filename"]}`
+            document.getElementById("0").src = `/image/${data[0]["filename"]}`
+            document.getElementById("1").src = `/image/${data[1]["filename"]}`
             sessionStorage.setItem('images',JSON.stringify(data))
+            sessionStorage.setItem("0",data[0]["filename"])
+            sessionStorage.setItem("1",data[1]["filename"])
+            sessionStorage.setItem("i","1")
         })
-        function clickprint(){
-            console.log(sessionStorage.getItem('images'))
-            let data = JSON.parse(sessionStorage.getItem('images'))
-            console.log(data)
-            document.getElementById("image2").src = `/image/${data[4]["filename"]}`
+        function clickprint(event){
+            
+            if(event.target.name==="0"){
+                let iele = parseInt(sessionStorage.getItem("i"))
+                iele+= 1;
+                let data = JSON.parse(sessionStorage.getItem("images"))
+                fetch(`/upvote/${sessionStorage.getItem("0")}`)
+                sessionStorage.setItem("i",iele)
+                sessionStorage.setItem("1",data[iele]["filename"])
+                document.getElementById("1").src = `/image/${data[iele]["filename"]}`
+
+            }
+            else{
+                let iele = parseInt(sessionStorage.getItem("i"))
+                iele+= 1;
+                let data = JSON.parse(sessionStorage.getItem("images"))
+                fetch(`/upvote/${sessionStorage.getItem("1")}`)
+                sessionStorage.setItem("i",iele)
+                sessionStorage.setItem("0",data[iele]["filename"])
+                document.getElementById("0").src = `/image/${data[iele]["filename"]}`
+            }
+            
         }
         
     </script>

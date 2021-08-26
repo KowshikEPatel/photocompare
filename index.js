@@ -117,5 +117,13 @@ app.get('/image/:filename',(req,res)=>{
 
 })
 
+app.get("/upvote/:id", async (req,res)=>{
+
+    let doc = await FilemonarrayModel.findOne({"filename":req.params.id});
+    doc["upvotes"]+=1;
+    await doc.save();
+    res.status(200)
+})
+
 
 app.listen(port,()=> console.log('server started on port ',port))
