@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
+const ejs=require("ejs");
 const methodOverride = require('method-override');
 const bodyParserjson = require('body-parser').json();
 
@@ -57,7 +58,9 @@ app.get('/',(req,res)=>{
 })
 
 app.get("/add",(req,res)=>{
-    res.render("add")
+    res.render("add",{
+        message: false 
+    })
 })
 
 app.get("/allimages",(req,res)=>{
@@ -66,7 +69,9 @@ app.get("/allimages",(req,res)=>{
 
 //route post upload desc uploads file ot db
 app.post('/upload', upload.single('file'),(req,res)=>{
-    res.redirect('/')
+    res.render('add',{
+        message: true 
+    })
 })
 
 //route get /files
