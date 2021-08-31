@@ -34,6 +34,10 @@
             place-content: center;
             font-weight: 600;
         }
+        .upvotebutton{
+            display: grid;
+            place-items:center ;
+        }
     </style>
 </head>
 <body>
@@ -50,31 +54,25 @@
         <div class="row">
             <div class="col-lg-5">
                 <img id="0" class="images"  alt="guvi image">
-                
+                <div class="upvotebutton">
+                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint(event)' name="1">
+                        <i class="fas fa-heart"></i> Upvote
+                    </button>
+                </div>
             </div>
             <div class="col-lg-2 or">
                 OR
             </div>
             <div class="col-lg-5">
                 <img id="1" class="images"  alt="guvi image">
-                
+                <div class="upvotebutton">
+                    <button class="btn btn-primary mt-2 px-2" onclick='clickprint(event)' name="1">
+                        <i class="fas fa-heart"></i> Upvote
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-5">
-                <button class="btn btn-primary mt-2 px-2" onclick='clickprint(event)' name="1">
-                    <i class="fas fa-heart"></i> Upvote
-                </button>
-            </div>
-            <div class="col-lg-2">
-                
-            </div>
-            <div class="col-lg-5">
-                <button class="btn btn-primary mt-2 px-2" onclick='clickprint(event)' name="0">
-                    <i class="fas fa-heart"></i>  Upvote
-                </button>
-            </div>
-        </div>
+        
     </div>
     
     <script>
