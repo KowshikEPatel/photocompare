@@ -38,9 +38,45 @@
             display: grid;
             place-items:center ;
         }
+        .spinner{
+            width: 80px;
+            height: 80px;
+            border:2px solid #f3f3f3;
+            border-top: 3px solid #500707;
+            position:absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+            border-radius: 100%;
+            animation:spin 1s infinite linear
+        }
+        @keyframes spin{
+            from{
+                transform:rotate(0deg);
+            }
+            to{
+                transform:rotate(360deg);
+            }
+        }
+        #overlay{
+            height:100%;
+            width:100%;
+            background: rgba(243, 243, 243,1.0);
+            position:fixed;
+            left:0;
+            top:0;
+        }
     </style>
 </head>
 <body>
+    <div id="overlay">
+        <div class="spinner">
+
+        </div>
+    </div>
+    
     <div class="row title">
         <p class="brand">Facemash</p>
         <nav>
@@ -76,6 +112,10 @@
     </div>
     
     <script>
+        let overlay = document.getElementById("overlay");
+        window.addEventListener('load',function(){
+            overlay.style.display='none';
+        })
         fetch("/files")
         .then(response=>response.json())
         .then(data=>{
@@ -88,7 +128,7 @@
             sessionStorage.setItem("i","1")
         })
         function clickprint(event){
-            
+            let loading = `<div>Loading...</div>`
             if(event.target.name==="0"){
                 let iele = parseInt(sessionStorage.getItem("i"))
                 iele+= 1;
