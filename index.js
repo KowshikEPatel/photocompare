@@ -29,23 +29,25 @@ conn.once('open',()=>{
 const storage = new GridFsStorage({
     url:dbURL,
     file:(req,file)=>{
-        return new Promise((resolve,reject) =>{
-            crypto.randomBytes(16, async(err,buf)=>{
-
-                if(err){
-                    return reject(err);
-                }
-                const filename = buf.toString('hex') + path.extname(file.originalname);
-                let savepostmod = new FilemonarrayModel({"filename":filename,"upvotes":0})
-                let savepost = await savepostmod.save()
-                console.log(savepost)
-                const fileInfo = {
-                    filename:filename,
-                    bucketName:'uploads'
-                };
-                resolve(fileInfo);
+        if(file.mimetype==='image/jpeg'||file.mimetype==='image/png'){
+            return new Promise((resolve,reject) =>{
+                crypto.randomBytes(16, async(err,buf)=>{
+    
+                    if(err){
+                        return reject(err);
+                    }
+                    const filename = buf.toString('hex') + path.extname(file.originalname);
+                    let savepostmod = new FilemonarrayModel({"filename":filename,"upvotes":0})
+                    let savepost = await savepostmod.save()
+                    
+                    const fileInfo = {
+                        filename:filename,
+                        bucketName:'uploads'
+                    };
+                    resolve(fileInfo);
+                })
             })
-        })
+        }
     }
 })
 const upload = multer({storage})
@@ -59,7 +61,7 @@ app.get('/',(req,res)=>{
 
 app.get("/add",(req,res)=>{
     res.render("add",{
-        message: false 
+        message: 1 
     })
 })
 
@@ -69,9 +71,17 @@ app.get("/allimages",(req,res)=>{
 
 //route post upload desc uploads file ot db
 app.post('/upload', upload.single('file'),(req,res)=>{
-    res.render('add',{
-        message: true 
-    })
+    
+    if(req.file.mimetype==='image/jpeg'||req.file.mimetype==='image/png'){
+        res.render('add',{
+            message: 0 
+        })
+    }
+    else{
+        res.render('add',{
+            message: 2 
+        })
+    }
 })
 
 //route get /files

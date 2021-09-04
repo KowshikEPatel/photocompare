@@ -38,16 +38,19 @@
             <a class="navi-item btn btn-light" href="/allimages"><i class="far fa-images"></i> <div class="links">All images</div></a>
         </nav>
     </div>
-    <% if(message){ %>
-   <h2 class="message" >File uploaded</h2>
-   <% } %>
+    <% if(message===0){ %>
+        <h2 class="message" >File uploaded</h2>
+    <% } %>
+    <% if(message===2){ %>
+        <h2 class="message" >File not upload: Upload Images only</h2>
+    <% } %>
     <div class="container">
         <div class="row">
             <div class="col-md-6 m-auto">
                 <h1 class="text-center display-4 my-4">Cute or Not File Upload</h1>
                 <form action="/upload" method="POST" enctype="multipart/form-data">
                     <div class="custom-file mb-3">
-                        <input type="file" name="file" id="file" class="custom-file-input">
+                        <input type="file" name="file" id="file" class="custom-file-input" accept="image/*" onchange="print()">
                         <label for="file" class="custom-file-label">Choose File</label>
                     </div>
                     <button type="submit" value="Submit" class="btn btn-primary"  >Upload</button>
@@ -55,6 +58,21 @@
             </div>
         </div>
     </div>
+    <script>
+        function print(){
+            let str = document.getElementById('file').value
+            console.log(str);
+            let arr;
+            if(navigator.platform==='Win32'){
+                 arr = str.split(`\\`);
+            }
+            console.log(arr[arr.length-1])
+            sessionStorage.setItem("filename", arr[arr.length-1]);
+        }
+        function test(){
+            cosole.log("success")
+        }
+    </script>
     
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
