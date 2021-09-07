@@ -33,16 +33,16 @@
     <div class="row title">
         <p class="brand">Facemash</p>
         <nav>
-            <a class="navi-item btn btn-light" href="/"><i class="fas fa-home"></i><div class="links">Cute or Not</div></a>
-            <a class="navi-item btn btn-light" href="/add"><i class="fas fa-upload"></i> <div class="links">Upload</div></a>
-            <a class="navi-item btn btn-light" href="/allimages"><i class="far fa-images"></i> <div class="links">All images</div></a>
+            <a class="navi-item btn btn-light m-2" href="/"><i class="fas fa-home"></i><div class="links">Cute or Not</div></a>
+            <a class="navi-item btn btn-light m-2" href="/add"><i class="fas fa-upload"></i> <div class="links">Upload</div></a>
+            <a class="navi-item btn btn-light m-2" href="/allimages"><i class="far fa-images"></i> <div class="links">All images</div></a>
         </nav>
     </div>
     <% if(message===0){ %>
         <h2 class="message" >File uploaded</h2>
     <% } %>
     <% if(message===2){ %>
-        <h2 class="message" >File not upload: Upload Images only</h2>
+        <h2 class="message" >File not upload: Upload Images only (JPEG/PNG)</h2>
     <% } %>
     <div class="container">
         <div class="row">

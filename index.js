@@ -140,5 +140,11 @@ app.get("/upvote/:id", async (req,res)=>{
     res.status(200)
 })
 
+app.get("/filearray", async (req,res)=>{
+
+    let result = await FilemonarrayModel.find({});
+    res.status(200).json(result);
+})
+
 
 app.listen(port,()=> console.log('server started on port ',port))

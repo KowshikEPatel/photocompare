@@ -37,9 +37,9 @@
         <div class="row title">
             <p class="brand">Facemash</p>
             <nav>
-                <a class="navi-item btn btn-light" href="/"><i class="fas fa-home"></i><div class="links">Cute or Not</div></a>
-                <a class="navi-item btn btn-light" href="/add"><i class="fas fa-upload"></i> <div class="links">Upload</div></a>
-                <a class="navi-item btn btn-light" href="/allimages"><i class="far fa-images"></i> <div class="links">All images</div></a>
+                <a class="navi-item btn btn-light m-2" href="/"><i class="fas fa-home"></i><div class="links">Cute or Not</div></a>
+                <a class="navi-item btn btn-light m-2" href="/add"><i class="fas fa-upload"></i> <div class="links">Upload</div></a>
+                <a class="navi-item btn btn-light m-2" href="/allimages"><i class="far fa-images"></i> <div class="links">All images</div></a>
             </nav>
         </div>
         <div class="container">
@@ -49,6 +49,7 @@
         </div>
         <script>
             
+
             function createDomMani(ele,eleClassName="",...arr){
                 var element1=document.createElement(ele);
    
@@ -66,14 +67,18 @@
             }
                 return element1;
             }
-            JSON.parse(sessionStorage.getItem('images')).map(e=>{
+            fetch('/filearray')
+            .then(response=>response.json())
+            .then(data=>{
+               data.map(e=>{
                 let colelement = createDomMani("div","col-lg-3")
                 let cardlelement = createDomMani("div","card")
                 let imageele = createDomMani("img","card-img-top",`src=/image/${e["filename"]}`)
-                cardlelement.append(imageele)
+                let titleele = createDomMani("div","card-title m-2 p-2",`Upvotes ${e["upvotes"]}`)
+                cardlelement.append(imageele,titleele)
                 colelement.append(cardlelement)
                 document.getElementById("images").append(colelement)
-
+                })
             })
         </script>
     </body>
